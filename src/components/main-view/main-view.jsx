@@ -7,7 +7,7 @@ export const MainView = () => {
     {
         id: 1,
         title: "Clue",
-        image: "https://www.imdb.com/title/tt0088930/mediaviewer/rm3160216832/?ref_=tt_ov_i",
+        image: "https://m.media-amazon.com/images/I/913DShsadYL._AC_UF894,1000_QL80_.jpg",
         description: "Six guests are anonymously invited to a strange mansion for dinner, but after their host is killed, they must cooperate with the staff to identify the murderer as the bodies pile up.",
         genre: "Mystery",
         director: "Jonathan Lynn"
