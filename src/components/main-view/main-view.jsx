@@ -23,7 +23,7 @@ export const MainView = () => {
     {
         id: 3,
         title: "Jurassic Park",
-        image: "https://m.media-amazon.com/images/M/MV5BMjM2MDgxMDg0Nl5BMl5BanBnXkFtZTgwNTM2OTM5NDE@._V1_.jpg",
+        image: "https://www.imdb.com/title/tt0107290/mediaviewer/rm3913805824/?ref_=tt_ov_i",
         description: "A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
         genre: "Action",
         director: "Steven Spielberg"
