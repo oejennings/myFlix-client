@@ -11,20 +11,20 @@ export const MainView = () => {
         fetch("https://oj-movies-0c0784fe26f8.herokuapp.com/movies")
         .then((response) => response.json())
         .then((data) => {
-            const moviesFromApi = data.docs.map((doc) => {
+            const moviesFromApi = data.map((movie) => {
                 return {
                     _id: movie._id,
-                    title: movie.title,
-                    description: movie.description,
-                    genre: {
-                        name: movie.genre.name,
-                        description: movie.genre.descriptioni
+                    Title: movie.Title,
+                    Description: movie.Description,
+                    Genre: {
+                        Name: movie.Genre.Name,
+                        Description: movie.Genre.Description
                     },
-                    director: {
-                        name: movie.director.name,
-                        bio: movie.director.bio
+                    Director: {
+                        Name: movie.Director.Name,
+                        Bio: movie.Director.Bio
                     },
-                    image: movie.imagePath 
+                    ImagePath: movie.ImagePath 
                 };
             });
             setMovies(moviesFromApi);
