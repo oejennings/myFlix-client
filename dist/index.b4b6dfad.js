@@ -27178,7 +27178,7 @@ const MainView = ()=>{
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
         fetch("https://oj-movies-0c0784fe26f8.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
-            const moviesFromApi = movies.map((movie)=>{
+            const moviesFromApi = data.map((movie)=>{
                 return {
                     _id: movie._id,
                     Title: movie.Title,
@@ -27218,7 +27218,7 @@ const MainView = ()=>{
                 onMovieClick: (newSelectedMovie)=>{
                     setSelectedMovie(newSelectedMovie);
                 }
-            }, movie.id, false, {
+            }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 46,
                 columnNumber: 17
@@ -27257,7 +27257,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
         onClick: ()=>{
             onMovieClick(movie);
         },
-        children: movies.Title
+        children: movie.Title
     }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
         lineNumber: 5,
@@ -27278,7 +27278,8 @@ MovieCard.propTypes = {
             Bio: (0, _propTypesDefault.default).string.isRequired
         }).isRequired,
         ImagePath: (0, _propTypesDefault.default).string.isRequired
-    })
+    }).isRequired,
+    onMovieClick: (0, _propTypesDefault.default).func.isRequired
 };
 var _c;
 $RefreshReg$(_c, "MovieCard");

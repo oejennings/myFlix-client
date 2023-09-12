@@ -7,7 +7,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
                 onMovieClick(movie);
             }}
         >
-            {movies.Title}
+            {movie.Title}
         </div>
     );
 };
@@ -25,5 +25,6 @@ MovieCard.propTypes = {
             Bio: PropTypes.string.isRequired
         }).isRequired,
         ImagePath: PropTypes.string.isRequired
-    })
-}
+    }).isRequired,
+    onMovieClick: PropTypes.func.isRequired
+};
