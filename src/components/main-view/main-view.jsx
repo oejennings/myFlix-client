@@ -11,7 +11,7 @@ export const MainView = () => {
         fetch("https://oj-movies-0c0784fe26f8.herokuapp.com/movies")
         .then((response) => response.json())
         .then((data) => {
-            const moviesFromApi = data.map((movie) => {
+            const moviesFromApi = movies.map((movie) => {
                 return {
                     _id: movie._id,
                     Title: movie.Title,
@@ -44,8 +44,8 @@ export const MainView = () => {
         <div>
             {movies.map((movie) => (
                 <MovieCard 
-                    key={movie._id} 
-                    movie={movie}
+                    key={movie.id} 
+                    movie={movies}
                     onMovieClick={(newSelectedMovie) => {
                         setSelectedMovie(newSelectedMovie);
                     }}

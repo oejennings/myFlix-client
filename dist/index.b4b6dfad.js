@@ -27178,7 +27178,7 @@ const MainView = ()=>{
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
         fetch("https://oj-movies-0c0784fe26f8.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
-            const moviesFromApi = data.map((movie)=>{
+            const moviesFromApi = movies.map((movie)=>{
                 return {
                     _id: movie._id,
                     Title: movie.Title,
@@ -27214,11 +27214,11 @@ const MainView = ()=>{
     }, undefined);
     else return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                movie: movie,
+                movie: movies,
                 onMovieClick: (newSelectedMovie)=>{
                     setSelectedMovie(newSelectedMovie);
                 }
-            }, movie._id, false, {
+            }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 46,
                 columnNumber: 17
@@ -27257,7 +27257,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
         onClick: ()=>{
             onMovieClick(movie);
         },
-        children: movie.title
+        children: movies.Title
     }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
         lineNumber: 5,
