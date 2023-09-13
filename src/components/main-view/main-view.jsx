@@ -3,8 +3,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
-   const [movies, setMovies] = useState ([]);
-
+   const [movies, setMovies] = useState([]);
    const [selectedMovie, setSelectedMovie] = useState(null);
 
     useEffect(() => {
@@ -18,11 +17,11 @@ export const MainView = () => {
                     Description: movie.Description,
                     Genre: {
                         Name: movie.Genre.Name,
-                        Description: movie.Genre.Description
+                        Description: movie.Genre.Description,
                     },
                     Director: {
                         Name: movie.Director.Name,
-                        Bio: movie.Director.Bio
+                        Bio: movie.Director.Bio,
                     },
                     ImagePath: movie.ImagePath 
                 };
