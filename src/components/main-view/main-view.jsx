@@ -8,8 +8,12 @@ export const MainView = () => {
    const [selectedMovie, setSelectedMovie] = useState(null);
    const [user, setUser] = useState(null);
    const [token, setToken] = useState(null);
+   const storedUser = JSON.parse(localStorage.getItem("user"));
+   const storedToken = localStorage.getItem("token");
 
     useEffect(() => {
+        if(!token) return;
+
         fetch("https://oj-movies-0c0784fe26f8.herokuapp.com/movies", {
             headers: { Authorization: `Bearer ${token}` }
         })
@@ -57,7 +61,7 @@ export const MainView = () => {
    } else {
     return (
         <div>
-            <button onClick={() => { setUser(null); setToken(null); }}>Logout</button>
+            <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
             {movies.map((movie) => (
                 <MovieCard 
                     key={movie._id} 
