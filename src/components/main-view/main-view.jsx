@@ -7,9 +7,12 @@ export const MainView = () => {
    const [movies, setMovies] = useState([]);
    const [selectedMovie, setSelectedMovie] = useState(null);
    const [user, setUser] = useState(null);
+   const [token, setToken] = useState(null);
 
     useEffect(() => {
-        fetch("https://oj-movies-0c0784fe26f8.herokuapp.com/movies")
+        fetch("https://oj-movies-0c0784fe26f8.herokuapp.com/movies", {
+            headers: { Authorization: `Bearer ${token}` }
+        })
         .then((response) => response.json())
         .then((data) => {
             const moviesFromApi = data.map((movie) => {
@@ -30,10 +33,17 @@ export const MainView = () => {
             });
             setMovies(moviesFromApi);
         });
-    }, []);
+    }, [token]);
 
     if (!user) {
-        return <LoginView onLoggedIn={(user) => setUser(user)} />;
+        return (
+        <LoginView
+            onLoggedIn={(user, token) => {
+                setUser(user);
+                setToken(token);
+            }}
+        />
+        );
     }
    
    if (selectedMovie) {
@@ -47,7 +57,7 @@ export const MainView = () => {
    } else {
     return (
         <div>
-            <button onClick={() => { setUser(null); }}>Logout</button>
+            <button onClick={() => { setUser(null); setToken(null); }}>Logout</button>
             {movies.map((movie) => (
                 <MovieCard 
                     key={movie._id} 
