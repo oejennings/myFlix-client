@@ -28458,7 +28458,7 @@ const LoginView = ({ onLoggedIn })=>{
             Username: username,
             Password: password
         };
-        fetch("YOUR_API_URL/login", {
+        fetch("https://oj-movies-0c0784fe26f8.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -28568,7 +28568,7 @@ const SignupView = ()=>{
             Email: email,
             Birthday: birthday
         };
-        fetch("SIGNUP_URL", {
+        fetch("https://oj-movies-0c0784fe26f8.herokuapp.com/users", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
