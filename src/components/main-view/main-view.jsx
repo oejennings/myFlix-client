@@ -41,42 +41,45 @@ export const MainView = () => {
         });
     }, [token]);
 
-    if (!user) {
-        return (
-        <>
-        <LoginView
-            onLoggedIn={(user, token) => {
-                setUser(user);
-                setToken(token);
-            }} />
-        or 
-        <SignupView />
-        </>
-        );
-    }
-   
-   if (selectedMovie) {
     return (
-        <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-    );
-   }
-
-   if (movies.length === 0) {
-    return <div>The List is empty!</div>
-   } else {
-    return (
-        <div>
-            <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
-            {movies.map((movie) => (
-                <MovieCard 
-                    key={movie._id} 
-                    movie={movie}
-                    onMovieClick={(newSelectedMovie) => {
+        <Row>
+            {!user ? (
+            <>
+                <LoginView
+                    onLoggedIn={(user, token) => {
+                    setUser(user);
+                    setToken(token);
+                }} />
+                or 
+                <SignupView />
+            </>
+            ) : selectedMovie ? (
+               <MovieView
+                movie={selectedMovie}
+                onBackClick={() => setSelectedMovie(null)}
+                />
+            ) : movies.length === 0 ? (
+                <div>The List is empty!</div>
+            ) : (
+                <>
+                    {movies.map((movie) => (
+                        <MovieCard 
+                        key={movie._id} 
+                        movie={movie}
+                        onMovieClick={(newSelectedMovie) => {
                         setSelectedMovie(newSelectedMovie);
                     }}
                 />
             ))}
-        </div>
+            <button
+               onClick={() => { 
+                setUser(null);
+                setToken(null);
+                localStorage.clear();
+               }}
+            >Logout</button>
+        </>
+            )}
+        </Row>
     );
-   }
-  };
+};
