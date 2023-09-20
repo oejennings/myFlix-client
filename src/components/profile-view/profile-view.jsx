@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { Card, Button, Row, Col, Form } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 
@@ -8,8 +8,8 @@ export const ProfileView = ({ user, token, updateUser, movies }) => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState(user.Email);
     const [birthday, setBirthday] = useState(user.Birthday);
-    const favoriteMovies = movies.filter((movies) => { 
-        return user.FavoriteMovies.includes(movies._id)});
+    const favoriteMovies = movies.filter((movie) => { 
+        return user.FavoriteMovies.includes(movie._id)});
 
     updateUser = () => {
         const data = {

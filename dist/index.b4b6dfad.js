@@ -27360,7 +27360,7 @@ const MainView = ()=>{
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "nha2IxxeZRLayd1x1XAdx6u5CJ0=");
+_s(MainView, "Ws+FjyIAVqWKTjBf78Qv39oZiMk=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -47566,8 +47566,8 @@ const ProfileView = ({ user, token, updateUser, movies })=>{
     const [password, setPassword] = (0, _react.useState)("");
     const [email, setEmail] = (0, _react.useState)(user.Email);
     const [birthday, setBirthday] = (0, _react.useState)(user.Birthday);
-    const favoriteMovies = movies.filter((movies)=>{
-        return user.FavoriteMovies.includes(movies._id);
+    const favoriteMovies = movies.filter((movie)=>{
+        return user.FavoriteMovies.includes(movie._id);
     });
     updateUser = ()=>{
         const data = {
