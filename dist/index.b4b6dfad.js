@@ -27238,7 +27238,7 @@ const MainView = ()=>{
                     lineNumber: 49,
                     columnNumber: 21
                 }, undefined),
-                "or",
+                "or Sign Up",
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {}, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 55,

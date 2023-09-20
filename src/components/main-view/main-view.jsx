@@ -51,7 +51,7 @@ export const MainView = () => {
                         setUser(user);
                         setToken(token);
                     }} />
-                    or 
+                    or Sign Up
                     <SignupView />
                 </Col>
             ) : selectedMovie ? (
