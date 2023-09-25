@@ -31,38 +31,22 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
             localStorage.setItem("userObject", JSON.stringify(res));
             alert("Movie is added");
         })
-    }
+    };
 
-    // const [isFavorite, setIsFavorite] = useState(
-    //     user.FavoriteMovies.includes(movie._id)
-    // );
-
-    // const addFavoriteMovie = () => {
-    //     fetch (`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
-    //     {
-    //         method: "POST",
-    //         headers: {Authorization: `Bearer ${token}` }
-    //     })
-    //     .then((response) => {
-    //         if (response.ok) {
-    //             return response.json();
-    //         } else {
-    //             alert('Failed');
-    //             return false;
-    //         }
-    //     })
-    //     .then((user) => {
-    //         if (user) {
-    //             alert("Added to Favorites");
-    //             localStorage.setItem("user", JSON.stringify(user));
-    //             setUser(user);
-    //             setIsFavorite(true);
-    //         }
-    //     })
-    //     .catch((e) => {
-    //         alert(e);
-    //     });
-    // };
+    removeFromFavorite = () => {
+        fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer $(token)`,
+            }
+        }).then((res) => {
+            setIsFavorite(false);
+            setUser(res);
+            localStorage.setItem("userObject", JSON.stringify(res));
+            alert("Movie was removed");
+        });
+    };
 
     return (
         <Card className="h-100">
@@ -80,7 +64,7 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
                         Remove From Favorites
                     </Button>
                 ) : (
-                    <Button variant="primary" onClick={addFavoriteMovie}>
+                    <Button variant="primary" onClick={addToFavorite}>
                         Add to Favorites
                     </Button>
                 )}

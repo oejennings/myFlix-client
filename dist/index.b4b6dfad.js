@@ -27414,35 +27414,20 @@ const MovieCard = ({ movie, user, token, setUser })=>{
             alert("Movie is added");
         });
     };
-    // const [isFavorite, setIsFavorite] = useState(
-    //     user.FavoriteMovies.includes(movie._id)
-    // );
-    // const addFavoriteMovie = () => {
-    //     fetch (`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
-    //     {
-    //         method: "POST",
-    //         headers: {Authorization: `Bearer ${token}` }
-    //     })
-    //     .then((response) => {
-    //         if (response.ok) {
-    //             return response.json();
-    //         } else {
-    //             alert('Failed');
-    //             return false;
-    //         }
-    //     })
-    //     .then((user) => {
-    //         if (user) {
-    //             alert("Added to Favorites");
-    //             localStorage.setItem("user", JSON.stringify(user));
-    //             setUser(user);
-    //             setIsFavorite(true);
-    //         }
-    //     })
-    //     .catch((e) => {
-    //         alert(e);
-    //     });
-    // };
+    removeFromFavorite = ()=>{
+        fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer $(token)`
+            }
+        }).then((res)=>{
+            setIsFavorite(false);
+            setUser(res);
+            localStorage.setItem("userObject", JSON.stringify(res));
+            alert("Movie was removed");
+        });
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
         className: "h-100",
         children: [
@@ -27451,7 +27436,7 @@ const MovieCard = ({ movie, user, token, setUser })=>{
                 src: movie.ImagePath
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 69,
+                lineNumber: 53,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27460,14 +27445,14 @@ const MovieCard = ({ movie, user, token, setUser })=>{
                         children: movie.Title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 71,
+                        lineNumber: 55,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: movie.Description
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 72,
+                        lineNumber: 56,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27477,24 +27462,24 @@ const MovieCard = ({ movie, user, token, setUser })=>{
                             children: "Details"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 74,
+                            lineNumber: 58,
                             columnNumber: 21
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 73,
+                        lineNumber: 57,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 70,
+                lineNumber: 54,
                 columnNumber: 13
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 68,
+        lineNumber: 52,
         columnNumber: 9
     }, undefined);
 };
@@ -46932,34 +46917,38 @@ parcelHelpers.export(exports, "MovieView", ()=>MovieView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _reactRouter = require("react-router");
 var _reactRouterDom = require("react-router-dom");
-var _react = require("react");
+// import { useState, useEffect } from "react";
 var _movieViewScss = require("./movie-view.scss");
 var _s = $RefreshSig$();
 const MovieView = ({ movies })=>{
     _s();
     const { movieId } = (0, _reactRouter.useParams)();
     const movie = movies.find((movie)=>movie._id === movieId);
-    const [isFavorite, setIsFavorite] = (0, _react.useState)(false);
-    (0, _react.useEffect)(()=>{
-        console.log(user);
-        if (user.FavoriteMovies && user.FavoriteMovies.includes(movie._id)) setIsFavorite(true);
-    }, []);
-    addToFavorite = ()=>{
-        fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer $(token)`
-            }
-        }).then((response)=>{
-            if (response.ok) return response.json();
-        }).then((res)=>{
-            setIsFavorite(false);
-            setUser(res);
-            localStorage.setItem("userObject", JSON.stringify(res));
-            alert("Movie is added");
-        });
-    };
+    // const [isFavorite, setIsFavorite] = useState(false);
+    // useEffect(() => {
+    //     console.log(user);    
+    //     if(user.FavoriteMovies && user.FavoriteMovies.includes(movie._id) ) {
+    //         setIsFavorite(true);
+    //     };
+    // }, []);
+    // addToFavorite = () => {
+    //     fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer $(token)`,
+    //         }
+    //     }).then((response) => {
+    //         if(response.ok){
+    //             return response.json();
+    //         }
+    //     }).then((res) => {
+    //         setIsFavorite(false);
+    //         setUser(res);
+    //         localStorage.setItem("userObject", JSON.stringify(res));
+    //         alert("Movie is added");
+    //     })
+    // }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -47129,7 +47118,7 @@ const MovieView = ({ movies })=>{
         columnNumber: 9
     }, undefined);
 };
-_s(MovieView, "Eu5S1baMK/gY/xYLj5Nss4rVVBI=", false, function() {
+_s(MovieView, "e2L2DPdRH1AShA7yIOCsYRlzvlI=", false, function() {
     return [
         (0, _reactRouter.useParams)
     ];
@@ -47143,7 +47132,7 @@ $RefreshReg$(_c, "MovieView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-router":"dbWyW","react-router-dom":"9xmpe","./movie-view.scss":"jnlR5","@parcel/transformer-js/src/esmodule-helpers.js":"2P46S","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"dSyxf","react":"21dqq"}],"jnlR5":[function() {},{}],"9YtA0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-router":"dbWyW","react-router-dom":"9xmpe","./movie-view.scss":"jnlR5","@parcel/transformer-js/src/esmodule-helpers.js":"2P46S","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"dSyxf"}],"jnlR5":[function() {},{}],"9YtA0":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
