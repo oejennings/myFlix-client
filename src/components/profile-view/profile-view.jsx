@@ -1,9 +1,9 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Card, Button, Row, Col, Form } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 
-export const ProfileView = ({ user, token, updateUser, setUser, movies }) => {
+export const ProfileView = ({ user, token, setUser, movies }) => {
     const [username, setUsername] = useState(user.Username);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState(user.Email);
@@ -57,32 +57,6 @@ export const ProfileView = ({ user, token, updateUser, setUser, movies }) => {
             }
         })
     }
-
-    // updateUser = () => {
-    //     const data = {
-    //         Username: username,
-    //         Password: password,
-    //         Email: email, 
-    //         Birthday: birthday
-    //     };
-
-    //     fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}`, {
-    //         method: "PUT",
-    //         body: JSON.stringify(data),
-    //         headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}`}
-    //     }).then((response) => {
-    //         if (response.ok) {
-    //             return response.json();
-    //         } else {
-    //             alert("Update Failed")
-    //         }
-    //     }).then((data) => {
-    //         if (data) {
-    //             localStorage.setItem("user", JSON.stringify(data));
-    //             setUser(data);
-    //         }
-    //     })
-    // }
 
     return (
        <>
