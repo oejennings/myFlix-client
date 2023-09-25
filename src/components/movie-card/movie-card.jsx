@@ -5,48 +5,101 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie, user, token, setUser }) => {
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(
+        user.FavoriteMovies.includes(movie._id)
+    );
 
-    useEffect(() => {
-        console.log(user);    
-        if(user.FavoriteMovies && user.FavoriteMovies.includes(movie._id) ) {
-            setIsFavorite(true);
-        };
-    }, []);
+    // useEffect(() => {
+    //     console.log(user);    
+    //     if(user.FavoriteMovies && user.FavoriteMovies.includes(movie._id) ) {
+    //         setIsFavorite(true);
+    //     };
+    // }, []);
 
-    addToFavorite = () => {
+    // addToFavorite = () => {
+    //     fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer $(token)`,
+    //         }
+    //     }).then((response) => {
+    //         if(response.ok){
+    //             return response.json();
+    //         }
+    //     }).then((res) => {
+    //         setIsFavorite(false);
+    //         setUser(res);
+    //         localStorage.setItem("userObject", JSON.stringify(res));
+    //         alert("Movie is added");
+    //     })
+    // };
+
+
+
+    // removeFromFavorite = () => {
+    //     fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+    //         method: "DELETE",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer $(token)`,
+    //         }
+    //     }).then((res) => {
+    //         setIsFavorite(false);
+    //         setUser(res);
+    //         localStorage.setItem("userObject", JSON.stringify(res));
+    //         alert("Movie was removed");
+    //     });
+    // };
+
+    const addToFavorite = () => {
         fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer $(token)`,
+                // "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
             }
         }).then((response) => {
             if(response.ok){
                 return response.json();
+            } else {
+                alert("Failed");
+                return false;
             }
-        }).then((res) => {
-            setIsFavorite(false);
-            setUser(res);
-            localStorage.setItem("userObject", JSON.stringify(res));
+        }).then((user) => {
+            setIsFavorite(true);
+            setUser(user);
+            localStorage.setItem("user", JSON.stringify(user));
             alert("Movie is added");
-        })
+        }).catch((e) => {
+            alert(e);
+        });
     };
 
-    removeFromFavorite = () => {
+    const removeFromFavorite = () => {
         fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer $(token)`,
+                // "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
             }
-        }).then((res) => {
+        }).then((response) => {
+            if(response.ok) {
+                return response.json();
+            } else {
+                alert("Failed");
+                return false;
+            }
+        }).then((user) => {
             setIsFavorite(false);
-            setUser(res);
-            localStorage.setItem("userObject", JSON.stringify(res));
+            setUser(user);
+            localStorage.setItem("user", JSON.stringify(user));
             alert("Movie was removed");
+        }).catch((e) => {
+            alert(e);
         });
     };
+
 
     return (
         <Card className="h-100">

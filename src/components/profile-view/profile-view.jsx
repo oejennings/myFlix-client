@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Card, Button, Row, Col, Form } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 
-export const ProfileView = ({ user, token, updateUser, movies }) => {
+export const ProfileView = ({ user, token, updateUser, setUser, movies }) => {
     const [username, setUsername] = useState(user.Username);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState(user.Email);
@@ -86,7 +86,7 @@ export const ProfileView = ({ user, token, updateUser, movies }) => {
        </Row>
        <Row className="justify-content-center">
         {favoriteMovies.map((movie) => (
-            <Col className="mb-4" key={movie._id} xs={6} md={3}>
+            <Col className="mb-4 d-flex" key={movie._id} xs={12} sm={6} md={4} lg={3}>
                 <MovieCard 
                     movie={movie}
                     user={user}
