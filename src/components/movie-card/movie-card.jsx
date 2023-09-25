@@ -61,14 +61,14 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
     return (
         <Card className="h-100">
             <Card.Img variant="top" src={movie.ImagePath} />
-            <Card.Body>
+            <Card.Body className="info">
                 <Card.Title>{movie.Title}</Card.Title>
                 <Card.Text>{movie.Description}</Card.Text>
                 <Link to={`/movies/${movie._id}`}>
                     <Button variant="primary">Details</Button>
                 </Link>
             </Card.Body>
-            <Card.Body>
+            <Card.Body className="favorite">
                 {isFavorite ? (
                     <Button variant="primary" onClick={removeFromFavorite}>
                         Remove From Favorites

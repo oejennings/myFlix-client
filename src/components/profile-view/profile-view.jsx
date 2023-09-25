@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Card, Button, Row, Col, Form } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
+import "./profile-view.scss";
 
 export const ProfileView = ({ user, token, setUser, movies }) => {
     const [username, setUsername] = useState(user.Username);
@@ -60,8 +61,8 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
 
     return (
        <>
-       <Row className="justify-content-center">
-        <Col md={5}>
+       <Row className= "justify-content-center">
+        <Col md={6}>
             <h1>My Profile</h1>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formUsername" className='form-group'>
@@ -100,20 +101,22 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
                             required
                         />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={handleSubmit}>
-                        Update Information
-                    </Button>
+                    
                 </Form>
         </Col>
        </Row>
        <Row className="justify-conent-center">
-        <Col className="delete-button" md={4}>
-            <Button variant="primary" onClick={deleteUser}>
+        <Button variant="primary" type="submit" onClick={handleSubmit}>
+            Update Information
+        </Button>
+       </Row>
+       <Row className="delete-button">
+            <Button variant="danger" onClick={deleteUser}>
                 Delete Account
             </Button>
-        </Col>
        </Row>
        <Row className="justify-content-center">
+        <h3>Favorite Movies: </h3>
         {favoriteMovies.map((movie) => (
             <Col className="mb-4 d-flex" key={movie._id} md={4}>
                 <MovieCard 
