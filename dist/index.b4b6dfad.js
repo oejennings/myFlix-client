@@ -27312,10 +27312,7 @@ const MainView = ()=>{
                                             className: "mg-5",
                                             md: 3,
                                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                                movie: movie,
-                                                user: user,
-                                                token: token,
-                                                setUser: setUser
+                                                movie: movie
                                             }, void 0, false, void 0, void 0)
                                         }, movie._id, false, void 0, void 0))
                                 }, void 0, false)
@@ -27342,7 +27339,7 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 133,
+                            lineNumber: 129,
                             columnNumber: 17
                         }, undefined)
                     ]
@@ -27390,44 +27387,46 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
-var _s = $RefreshSig$();
 const MovieCard = ({ movie, user, token, setUser })=>{
-    _s();
-    const [isFavorite, setIsFavorite] = (0, _react.useState)(false);
-    (0, _react.useEffect)(()=>{
-        console.log(user);
-        if (user.FavoriteMovies && user.FavoriteMovies.includes(movie._id)) setIsFavorite(true);
-    }, []);
-    addToFavorite = ()=>{
-        fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer $(token)`
-            }
-        }).then((response)=>{
-            if (response.ok) return response.json();
-        }).then((res)=>{
-            setIsFavorite(false);
-            setUser(res);
-            localStorage.setItem("userObject", JSON.stringify(res));
-            alert("Movie is added");
-        });
-    };
-    removeFromFavorite = ()=>{
-        fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer $(token)`
-            }
-        }).then((res)=>{
-            setIsFavorite(false);
-            setUser(res);
-            localStorage.setItem("userObject", JSON.stringify(res));
-            alert("Movie was removed");
-        });
-    };
+    // const [isFavorite, setIsFavorite] = useState(false);
+    // useEffect(() => {
+    //     console.log(user);    
+    //     if(user.FavoriteMovies && user.FavoriteMovies.includes(movie._id) ) {
+    //         setIsFavorite(true);
+    //     };
+    // }, []);
+    // addToFavorite = () => {
+    //     fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer $(token)`,
+    //         }
+    //     }).then((response) => {
+    //         if(response.ok){
+    //             return response.json();
+    //         }
+    //     }).then((res) => {
+    //         setIsFavorite(false);
+    //         setUser(res);
+    //         localStorage.setItem("userObject", JSON.stringify(res));
+    //         alert("Movie is added");
+    //     })
+    // };
+    // removeFromFavorite = () => {
+    //     fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+    //         method: "DELETE",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer $(token)`,
+    //         }
+    //     }).then((res) => {
+    //         setIsFavorite(false);
+    //         setUser(res);
+    //         localStorage.setItem("userObject", JSON.stringify(res));
+    //         alert("Movie was removed");
+    //     });
+    // };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
         className: "h-100",
         children: [
@@ -27506,7 +27505,6 @@ const MovieCard = ({ movie, user, token, setUser })=>{
         columnNumber: 9
     }, undefined);
 };
-_s(MovieCard, "lh6fxD9+vLbuebOO0x4Y5WwBqk4=");
 _c = MovieCard;
 MovieCard.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
