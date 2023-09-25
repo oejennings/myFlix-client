@@ -6,33 +6,6 @@ import './movie-view.scss';
 export const MovieView = ({ movies }) => {
     const { movieId } = useParams();
     const movie = movies.find((movie) => movie._id === movieId)
-    // const [isFavorite, setIsFavorite] = useState(false);
-
-    // useEffect(() => {
-    //     console.log(user);    
-    //     if(user.FavoriteMovies && user.FavoriteMovies.includes(movie._id) ) {
-    //         setIsFavorite(true);
-    //     };
-    // }, []);
-
-    // addToFavorite = () => {
-    //     fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             Authorization: `Bearer $(token)`,
-    //         }
-    //     }).then((response) => {
-    //         if(response.ok){
-    //             return response.json();
-    //         }
-    //     }).then((res) => {
-    //         setIsFavorite(false);
-    //         setUser(res);
-    //         localStorage.setItem("userObject", JSON.stringify(res));
-    //         alert("Movie is added");
-    //     })
-    // }
 
     return (
         <div>
