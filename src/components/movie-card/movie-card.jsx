@@ -1,40 +1,68 @@
 import React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie, user, token, setUser }) => {
-    const [isFavorite, setIsFavorite] = useState(
-        user.FavoriteMovies.includes(movie._id)
-    );
+    const [isFavorite, setIsFavorite] = useState(false);
 
-    const addFavoriteMovie = () => {
-        fetch (`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
-        {
+    useEffect(() => {
+        console.log(user);    
+        if(user.FavoriteMovies && user.FavoriteMovies.includes(movie._id) ) {
+            setIsFavorite(true);
+        };
+    }, []);
+
+    addToFavorite = () => {
+        fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
             method: "POST",
-            headers: {Authorization: `Bearer ${token}` }
-        })
-        .then((response) => {
-            if (response.ok) {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer $(token)`,
+            }
+        }).then((response) => {
+            if(response.ok){
                 return response.json();
-            } else {
-                alert('Failed');
-                return false;
             }
+        }).then((res) => {
+            setIsFavorite(false);
+            setUser(res);
+            localStorage.setItem("userObject", JSON.stringify(res));
+            alert("Movie is added");
         })
-        .then((user) => {
-            if (user) {
-                alert("Added to Favorites");
-                localStorage.setItem("user", JSON.stringify(user));
-                setUser(user);
-                setIsFavorite(true);
-            }
-        })
-        .catch((e) => {
-            alert(e);
-        });
-    };
+    }
+
+    // const [isFavorite, setIsFavorite] = useState(
+    //     user.FavoriteMovies.includes(movie._id)
+    // );
+
+    // const addFavoriteMovie = () => {
+    //     fetch (`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
+    //     {
+    //         method: "POST",
+    //         headers: {Authorization: `Bearer ${token}` }
+    //     })
+    //     .then((response) => {
+    //         if (response.ok) {
+    //             return response.json();
+    //         } else {
+    //             alert('Failed');
+    //             return false;
+    //         }
+    //     })
+    //     .then((user) => {
+    //         if (user) {
+    //             alert("Added to Favorites");
+    //             localStorage.setItem("user", JSON.stringify(user));
+    //             setUser(user);
+    //             setIsFavorite(true);
+    //         }
+    //     })
+    //     .catch((e) => {
+    //         alert(e);
+    //     });
+    // };
 
     return (
         <Card className="h-100">
@@ -46,7 +74,7 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
                     <Button variant="primary">Details</Button>
                 </Link>
             </Card.Body>
-            <Card.Body>
+            {/* <Card.Body>
                 {isFavorite ? (
                     <Button variant="primary" onClick={removeFavoriteMovie}>
                         Remove From Favorites
@@ -56,7 +84,7 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
                         Add to Favorites
                     </Button>
                 )}
-            </Card.Body>
+            </Card.Body> */}
         </Card>
     );
 };
