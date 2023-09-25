@@ -11,37 +11,85 @@ export const ProfileView = ({ user, token, updateUser, setUser, movies }) => {
     const favoriteMovies = movies.filter((movie) => { 
         return user.FavoriteMovies.includes(movie._id)});
 
-    updateUser = () => {
-        const data = {
-            Username: username,
-            Password: password,
-            Email: email, 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        let data = {
+            Username: username, 
+            Email: email,
             Birthday: birthday
         };
-
+        if(password) {
+            data['Password'] = password
+        }
         fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}`, {
             method: "PUT",
             body: JSON.stringify(data),
-            headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}`}
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
         }).then((response) => {
             if (response.ok) {
+                alert("Update Successful")
                 return response.json();
             } else {
                 alert("Update Failed")
             }
         }).then((data) => {
-            if (data) {
-                localStorage.setItem("user", JSON.stringify(data));
+            localStorage.setItem("user",JSON.stringify(data));
+            setUser(data);
+        })
+    };
+
+    const deleteUser = () => {
+        fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+            if (response.ok) {
+                setUser(null);
+                alert("Your account has been deleted")
+            } else {
+                alert("Something went wrong")
             }
         })
     }
+
+    // updateUser = () => {
+    //     const data = {
+    //         Username: username,
+    //         Password: password,
+    //         Email: email, 
+    //         Birthday: birthday
+    //     };
+
+    //     fetch(`https://oj-movies-0c0784fe26f8.herokuapp.com/users/${user.Username}`, {
+    //         method: "PUT",
+    //         body: JSON.stringify(data),
+    //         headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}`}
+    //     }).then((response) => {
+    //         if (response.ok) {
+    //             return response.json();
+    //         } else {
+    //             alert("Update Failed")
+    //         }
+    //     }).then((data) => {
+    //         if (data) {
+    //             localStorage.setItem("user", JSON.stringify(data));
+    //             setUser(data);
+    //         }
+    //     })
+    // }
 
     return (
        <>
        <Row className="justify-content-center">
         <Col md={5}>
             <h1>My Profile</h1>
-                <Form onClick={updateUser}>
+                <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formUsername" className='form-group'>
                         <Form.Label>Username:</Form.Label>
                         <Form.Control
@@ -78,15 +126,22 @@ export const ProfileView = ({ user, token, updateUser, setUser, movies }) => {
                             required
                         />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={updateUser}>
+                    <Button variant="primary" type="submit" onClick={handleSubmit}>
                         Update Information
                     </Button>
                 </Form>
         </Col>
        </Row>
+       <Row className="justify-conent-center">
+        <Col className="delete-button" md={4}>
+            <Button variant="primary" onClick={deleteUser}>
+                Delete Account
+            </Button>
+        </Col>
+       </Row>
        <Row className="justify-content-center">
         {favoriteMovies.map((movie) => (
-            <Col className="mb-4 d-flex" key={movie._id} xs={12} sm={6} md={4} lg={3}>
+            <Col className="mb-4 d-flex" key={movie._id} md={4}>
                 <MovieCard 
                     movie={movie}
                     user={user}
