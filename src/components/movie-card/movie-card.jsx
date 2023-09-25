@@ -58,9 +58,9 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
                     <Button variant="primary">Details</Button>
                 </Link>
             </Card.Body>
-            {/* <Card.Body>
+            <Card.Body>
                 {isFavorite ? (
-                    <Button variant="primary" onClick={removeFavoriteMovie}>
+                    <Button variant="primary" onClick={removeFromFavorite}>
                         Remove From Favorites
                     </Button>
                 ) : (
@@ -68,7 +68,7 @@ export const MovieCard = ({ movie, user, token, setUser }) => {
                         Add to Favorites
                     </Button>
                 )}
-            </Card.Body> */}
+            </Card.Body>
         </Card>
     );
 };
