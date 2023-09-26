@@ -101,14 +101,11 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
                             required
                         />
                     </Form.Group>
-                    
+                    <Button variant="primary" type="submit" onClick={handleSubmit}>
+                        Update Information
+                    </Button>
                 </Form>
         </Col>
-       </Row>
-       <Row className="justify-conent-center">
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Update Information
-        </Button>
        </Row>
        <Row className="delete-button">
             <Button variant="danger" onClick={deleteUser}>
