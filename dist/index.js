@@ -47851,4 +47851,4 @@ $RefreshReg$(_c, "ProfileView");
 }
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","../movie-card/movie-card":"bwuIu","./profile-view.scss":"eyKYH","@parcel/transformer-js/src/esmodule-helpers.js":"2P46S","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"dSyxf"}],"eyKYH":[function() {},{}],"lJZlQ":[function() {},{}]},["dZFBg","27zBW","d8Dch"], "d8Dch", "parcelRequireaec4")
 
-//# sourceMappingURL=index.b4b6dfad.js.map
+//# sourceMappingURL=index.js.map

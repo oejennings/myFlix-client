@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Card, Button, Row, Col, Form } from "react-bootstrap";
+import { Button, Row, Col, Form } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 import "./profile-view.scss";
 
