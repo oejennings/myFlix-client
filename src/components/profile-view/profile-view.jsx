@@ -38,7 +38,7 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
                 alert("Update Failed")
             }
         }).then((data) => {
-            localStorage.setItem("user",JSON.stringify(data));
+            localStorage.setItem("user", JSON.stringify(data));
             setUser(data);
         })
     };
