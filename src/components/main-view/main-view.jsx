@@ -16,6 +16,16 @@ export const MainView = () => {
    const [token, setToken] = useState(storedToken ? storedToken:null);
    const [movies, setMovies] = useState([]);
 
+   const handleSearch = (searchTerm) => {
+    // Filter the movies based on the search term
+    const filteredMovies = movies.filter((movie) =>
+        movie.Title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Update the movies state with the filtered results
+    setMovies(filteredMovies);
+};
+
     useEffect(() => {
         if(!token) return;
 
@@ -114,6 +124,11 @@ export const MainView = () => {
                             <Col>The list is empty!</Col>
                         ) : (
                             <>
+                            <Row>
+                                <Col>
+                                    <SearchForm onSearch={handleSearch} />
+                                </Col>
+                            </Row>
                             {movies.map((movie) => (
                                 <Col className="mg-5" key={movie._id} md={3}>
                                     <MovieCard movie={movie} 
