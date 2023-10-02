@@ -21,7 +21,7 @@ export const SearchForm = ({ onSearch }) => {
         className="mr-sm-2"
         id="search-bar"
         type="text"
-        placeholder="Search movies by title..."
+        placeholder="Search..."
         value={searchTerm}
         onChange={handleSearchChange}
       />
